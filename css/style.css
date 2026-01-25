@@ -538,3 +538,26 @@ textarea.form-input {
 .mb-4 { margin-bottom: 1rem; }
 .mb-8 { margin-bottom: 2rem; }
 .mb-16 { margin-bottom: 4rem; }
+/* ===== FULLSCREEN YOUTUBE BACKGROUND ===== */
+.video-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;            /* видео самый задний слой */
+  overflow: hidden;
+  pointer-events: none;  /* чтобы по сайту можно было кликать */
+}
+
+.video-bg iframe{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100vw;
+  height: 56.25vw;       /* 16:9 */
+
+  min-width: 177.78vh;   /* чтобы закрывало по высоте */
+  min-height: 100vh;
+
+  transform: translate(-50%, -50%);
+  border: 0;
+}

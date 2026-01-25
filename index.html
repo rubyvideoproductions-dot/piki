@@ -129,7 +129,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 120px 2rem 60px;
+      padding: 100px 0 40px;
       position: relative;
       z-index: 10;
     }
@@ -144,18 +144,16 @@
       --glow-boost: 15%;
       
       position: relative;
-      width: 85vw;
-      max-width: 1200px;
-      border-radius: 24px;
+      width: 100%;
+      border-radius: 0;
       isolation: isolate;
       transform: translate3d(0, 0, 0.01px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 
-        rgba(99, 102, 241, 0.08) 0px 1px 2px, 
-        rgba(99, 102, 241, 0.08) 0px 2px 4px, 
         rgba(99, 102, 241, 0.08) 0px 4px 8px, 
         rgba(99, 102, 241, 0.08) 0px 8px 16px, 
         rgba(99, 102, 241, 0.08) 0px 16px 32px;
@@ -182,6 +180,9 @@
 
     .video-card::before {
       border: 1px solid transparent;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
       background:
         linear-gradient(rgba(255,255,255,0.3) 0 100%) padding-box,
         linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
@@ -199,6 +200,9 @@
 
     .video-card::after {
       border: 1px solid transparent;
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
       background:
         radial-gradient(at 80% 55%, hsla(250,100%,76%,1) 0px, transparent 50%) padding-box,
         radial-gradient(at 69% 34%, hsla(280,100%,74%,1) 0px, transparent 50%) padding-box,
@@ -255,7 +259,7 @@
     .video-wrapper {
       position: relative;
       padding-top: 56.25%;
-      border-radius: 23px;
+      border-radius: 0;
       overflow: hidden;
       background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
     }
