@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>peak. | Video Production Studio</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -474,7 +475,7 @@
       </svg>
     </div>
     <svg class="loader-mountain" viewBox="0 0 100 50" width="100" height="50">
-      <path d="M0,45 L25,10 L50,45 L70,20 L90,45" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mountain-path"/>
+      <path d="M5,45 L30,10 L55,45 L75,20 L95,45" fill="none" stroke="#1a1a1a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="mountain-path"/>
     </svg>
   </div>
 
@@ -503,7 +504,7 @@
       <div class="video-card" id="videoCard">
         <span class="glow"></span>
         <div class="video-wrapper">
-          <iframe id="vimeoVideo" src="https://player.vimeo.com/video/1152345652?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" title="Showreel"></iframe>
+          <img src="assets/video.jpg" alt="Showreel placeholder" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
       </div>
     </section>
@@ -884,12 +885,9 @@
     // Loader logic
     const loader = document.getElementById('loader');
     const mainContent = document.getElementById('mainContent');
-    let minTimePassed = false, videoLoaded = false;
+    let minTimePassed = false, videoLoaded = true;
 
     setTimeout(() => { minTimePassed = true; checkReady(); }, 3000);
-    document.getElementById('vimeoVideo').addEventListener('load', () => { videoLoaded = true; checkReady(); });
-    setTimeout(hideLoader, 5000);
-
     function checkReady() { if (minTimePassed && videoLoaded) hideLoader(); }
     function hideLoader() {
       loader.classList.add('hidden');
