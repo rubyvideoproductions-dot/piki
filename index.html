@@ -8,458 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      background: #f5f3ff;
-      font-family: 'Inter', -apple-system, system-ui, sans-serif;
-      color: #1a1a1a;
-      overflow-x: hidden;
-    }
-
-    body.loading { overflow: hidden; }
-
-    /* ===== THREE.JS BACKGROUND ===== */
-    #webGLApp {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    /* ===== LOADER ===== */
-    .loader {
-      position: fixed;
-      inset: 0;
-      background: #f5f3ff;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
-
-    .loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .loader-logo {
-      opacity: 0;
-      animation: fadeIn 1s ease 0.3s forwards;
-      z-index: 10;
-    }
-
-    .loader-logo svg { height: 60px; width: auto; }
-
-    .loader-mountain {
-      margin-top: 2.5rem;
-      z-index: 10;
-    }
-
-    .mountain-path {
-      stroke-dasharray: 300;
-      stroke-dashoffset: 300;
-      animation: drawMountain 2s ease 0.8s forwards;
-    }
-
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes drawMountain { to { stroke-dashoffset: 0; } }
-
-    /* ===== MAIN CONTENT ===== */
-    .main-content {
-      position: relative;
-      z-index: 10;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-
-    .main-content.visible { opacity: 1; }
-
-    /* ===== HEADER ===== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 1.5rem 3rem;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .nav {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .nav-left { justify-self: start; }
-    .nav-right { justify-self: end; }
-
-    .logo {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-
-    .logo svg { height: 22px; width: auto; }
-
-    .nav-link {
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: #1a1a1a;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-      letter-spacing: 0.01em;
-    }
-
-    .nav-link:hover { opacity: 0.6; }
-
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 0 40px;
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ===== GLOWING VIDEO CARD ===== */
-    .video-card {
-      --glow-sens: 30;
-      --color-sens: 50;
-      --pointer-°: 45deg;
-      --pointer-d: 0;
-      --glow-color: 250deg 80% 85%;
-      --glow-boost: 15%;
-      
-      position: relative;
-      width: 100%;
-      border-radius: 0;
-      isolation: isolate;
-      transform: translate3d(0, 0, 0.01px);
-      border-top: 1px solid rgba(255, 255, 255, 0.4);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 
-        rgba(99, 102, 241, 0.08) 0px 4px 8px, 
-        rgba(99, 102, 241, 0.08) 0px 8px 16px, 
-        rgba(99, 102, 241, 0.08) 0px 16px 32px;
-    }
-
-    .video-card::before,
-    .video-card::after,
-    .video-card > .glow {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      transition: opacity 0.25s ease-out;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .video-card:not(:hover):not(.animating)::before,
-    .video-card:not(:hover):not(.animating)::after,
-    .video-card:not(:hover):not(.animating) > .glow {
-      opacity: 0;
-      transition: opacity 0.75s ease-in-out;
-    }
-
-    .video-card::before {
-      border: 1px solid transparent;
-      border-left: none;
-      border-right: none;
-      border-radius: 0;
-      background:
-        linear-gradient(rgba(255,255,255,0.3) 0 100%) padding-box,
-        linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
-        radial-gradient(at 80% 55%, hsla(250,100%,76%,1) 0px, transparent 50%) border-box,
-        radial-gradient(at 69% 34%, hsla(280,100%,74%,1) 0px, transparent 50%) border-box,
-        radial-gradient(at 8% 6%, hsla(200,100%,78%,1) 0px, transparent 50%) border-box,
-        radial-gradient(at 41% 38%, hsla(220,100%,64%,1) 0px, transparent 50%) border-box,
-        radial-gradient(at 86% 85%, hsla(260,100%,74%,1) 0px, transparent 50%) border-box,
-        radial-gradient(at 82% 18%, hsla(180,100%,65%,1) 0px, transparent 50%) border-box,
-        radial-gradient(at 51% 4%, hsla(300,100%,72%,1) 0px, transparent 50%) border-box,
-        linear-gradient(#a78bfa 0 100%) border-box;
-      opacity: calc((var(--pointer-d) - var(--color-sens)) / (100 - var(--color-sens)));
-      mask-image: conic-gradient(from var(--pointer-°) at center, black 25%, transparent 40%, transparent 60%, black 75%);
-    }
-
-    .video-card::after {
-      border: 1px solid transparent;
-      border-left: none;
-      border-right: none;
-      border-radius: 0;
-      background:
-        radial-gradient(at 80% 55%, hsla(250,100%,76%,1) 0px, transparent 50%) padding-box,
-        radial-gradient(at 69% 34%, hsla(280,100%,74%,1) 0px, transparent 50%) padding-box,
-        radial-gradient(at 8% 6%, hsla(200,100%,78%,1) 0px, transparent 50%) padding-box,
-        radial-gradient(at 41% 38%, hsla(220,100%,64%,1) 0px, transparent 50%) padding-box,
-        radial-gradient(at 86% 85%, hsla(260,100%,74%,1) 0px, transparent 50%) padding-box,
-        radial-gradient(at 82% 18%, hsla(180,100%,65%,1) 0px, transparent 50%) padding-box,
-        radial-gradient(at 51% 4%, hsla(300,100%,72%,1) 0px, transparent 50%) padding-box,
-        linear-gradient(#a78bfa 0 100%) padding-box;
-      mask-image:
-        linear-gradient(to bottom, black, black),
-        radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
-        radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
-        radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
-        radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
-        radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
-        conic-gradient(from var(--pointer-°) at center, transparent 5%, black 15%, black 85%, transparent 95%);
-      -webkit-mask-composite: subtract;
-      mask-composite: subtract;
-      opacity: calc((var(--pointer-d) - var(--color-sens)) / (100 - var(--color-sens)));
-      mix-blend-mode: darken;
-    }
-
-    .video-card > .glow {
-      --outset: 40px;
-      inset: calc(var(--outset) * -1);
-      z-index: 1;
-      mask-image: conic-gradient(from var(--pointer-°) at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%);
-      opacity: calc((var(--pointer-d) - var(--glow-sens)) / (100 - var(--glow-sens)));
-      mix-blend-mode: luminosity;
-    }
-
-    .video-card > .glow::before {
-      content: "";
-      position: absolute;
-      inset: var(--outset);
-      border-radius: inherit;
-      box-shadow: 
-        inset 0 0 0 1px hsl(var(--glow-color) / 100%), 
-        inset 0 0 1px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 60%)), 
-        inset 0 0 3px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 50%)), 
-        inset 0 0 6px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 40%)), 
-        inset 0 0 15px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 30%)), 
-        inset 0 0 25px 2px hsl(var(--glow-color) / calc(var(--glow-boost) + 20%)), 
-        inset 0 0 50px 2px hsl(var(--glow-color) / calc(var(--glow-boost) + 10%)), 
-        0 0 1px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 60%)), 
-        0 0 3px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 50%)), 
-        0 0 6px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 40%)), 
-        0 0 15px 0 hsl(var(--glow-color) / calc(var(--glow-boost) + 30%)), 
-        0 0 25px 2px hsl(var(--glow-color) / calc(var(--glow-boost) + 20%)), 
-        0 0 50px 2px hsl(var(--glow-color) / calc(var(--glow-boost) + 10%));
-    }
-
-    .video-wrapper {
-      position: relative;
-      padding-top: 56.25%;
-      border-radius: 0;
-      overflow: hidden;
-      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-    }
-
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    /* ===== MARQUEE ===== */
-    .marquee-container {
-      overflow: hidden;
-      padding: 3rem 0;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      position: relative;
-      z-index: 10;
-    }
-
-    .marquee {
-      display: flex;
-      gap: 4rem;
-      animation: marquee 30s linear infinite;
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-33.33%); }
-    }
-
-    .marquee span {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #1a1a1a;
-      white-space: nowrap;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: opacity 0.3s;
-    }
-
-    .marquee span:hover { opacity: 0.5; }
-
-    /* ===== SECTIONS ===== */
-    .section {
-      padding: 6rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 10;
-    }
-
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      color: #1a1a1a;
-    }
-
-    .section-text {
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: #333;
-      line-height: 1.8;
-      max-width: 520px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ===== PROJECTS ===== */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 768px) {
-      .projects-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .project-card {
-      aspect-ratio: 16/10;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.4s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px -15px rgba(99, 102, 241, 0.25);
-      border-color: rgba(255, 255, 255, 0.6);
-    }
-
-    .project-card span {
-      font-size: 0.875rem;
-      color: #666;
-    }
-
-    .placeholder-box {
-      aspect-ratio: 1;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .placeholder-box span {
-      font-size: 0.875rem;
-      color: #666;
-    }
-
-    /* ===== BUTTON ===== */
-    .btn-primary {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      background: #1a1a1a;
-      color: white;
-      border-radius: 100px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      background: #333;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-    }
-
-    /* ===== CONTACT ===== */
-    .contact-section {
-      text-align: center;
-      padding: 8rem 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      position: relative;
-      z-index: 10;
-    }
-
-    .contact-title {
-      font-size: 2.8rem;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-      color: #1a1a1a;
-    }
-
-    .contact-text {
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: #333;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ===== FOOTER ===== */
-    .footer {
-      padding: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      position: relative;
-      z-index: 10;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #666;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="loading">
 
@@ -482,25 +31,37 @@
   <!-- MAIN CONTENT -->
   <div class="main-content" id="mainContent">
 
-    <!-- Header -->
-    <header class="header">
-      <nav class="nav">
-        <div class="nav-left"><a href="works.html" class="nav-link">Works</a></div>
-        <a href="index.html" class="logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 698.92 274">
-            <path fill="#1a1a1a" d="M156.53,114.97c-12.74-54.84-80.58-79.96-121.53-37.97v-19H1.5c-.11,0-1.5,1.39-1.5,1.5v214.5h37l-.96-76.5c1.15-3.44,6.92,3.24,8.64,4.32,59.7,37.72,127.31-20.32,111.86-86.86ZM79.39,180.89c-54.56.95-59.67-84.77-8.63-91.63,64.38-8.66,65.79,90.63,8.63,91.63Z"/>
-            <path fill="#1a1a1a" d="M541,0v121c8.55-8.9,17.22-17.83,25.51-26.99,4.12-4.54,30.29-36.01,32.99-36.01h41.5l-55.8,64.35,61.8,87.65h-45.5l-42.05-62.04-2.53.7-15.72,18.04-1.2,43.3h-34.5l-1.57-207.53.23-1.3c.72-.15,1.98-1.17,2.34-1.17h34.5Z"/>
-            <path fill="#1a1a1a" d="M674.73,171.24c17.37-2.92,30.81,16.91,20.7,31.69-13.61,19.9-45.74,4.32-36.64-18.64,2.49-6.28,9.22-11.93,15.93-13.06Z"/>
-            <path fill="#1a1a1a" d="M468.5,87c-19.43-43.12-93.18-36.25-125.58-12.35-.27,1.66,12.19,26.93,13.68,27.28,6.78-2.41,12.69-6.89,19.42-9.4,24.39-9.1,64.38-8,62,26.9-.15,1.02-3.4.7-4.55.61-33.02-2.33-94-6.29-99.37,39.57-6.4,54.69,73.05,70.12,103.88,35.39l1.01,15h35v-102.5c0-3.56-3.84-16.81-5.5-20.5ZM390.61,183.89c-15.25-1.78-26.74-15.53-15.61-29.39,2.54-3.16,12.78-8.5,16.5-8.5h46.5c1.63,28.11-21.81,40.88-47.39,37.89Z"/>
-            <path fill="#1a1a1a" d="M266.84,57.66c-98.85-21.87-129.37,123.63-43.38,151.38,29.22,9.43,70.63,3.38,91.45-20.39l-21.42-24.63c-24.15,25.96-74.97,24.91-82.5-15.02l109.07-1.44c5.89-38.52-12.48-80.89-53.22-89.91ZM210,120c10.28-41.91,66.79-45.4,74,0h-74Z"/>
-          </svg>
-        </a>
-        <div class="nav-right"><a href="contact.html" class="nav-link">Contact</a></div>
-      </nav>
-    </header>
+    <!-- Typographic Cover -->
+    <section id="hero-cover">
+        <!-- Top Bar -->
+        <div class="cover-bar top">
+            <div class="bar-left">PEAK:2026</div>
+            <div class="bar-center">PEAK STUDIOS</div>
+            <div class="bar-right">©2026</div>
+        </div>
 
-    <!-- Hero -->
-    <section class="hero">
+        <!-- Center Stage -->
+        <div class="cover-center">
+            <h1 class="main-title reveal-text">YOUR GOALS. OUR SPARK.<br>PEAK RESULTS.</h1>
+            <h2 class="subtitle reveal-text">ADAPTIVE CREATIVE PROFESSIONAL EFFICIENT.</h2>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="cover-bar bottom">
+            <div class="bar-left">AVAIL: NOW</div>
+            <div class="bar-center"><a href="contact.html" class="cover-link">CONTACT</a></div>
+            <div class="bar-right" id="clock">00:00:00 PM, FR</div>
+        </div>
+        
+        <!-- Decorations -->
+        <div class="marker top-left">+</div>
+        <div class="marker top-right">+</div>
+        <div class="marker bottom-left">+</div>
+        <div class="marker bottom-right">+</div>
+    </section>
+
+    <!-- Showreel -->
+    <section id="showreel" class="section">
       <div class="video-card" id="videoCard">
         <span class="glow"></span>
         <div class="video-wrapper">
@@ -517,42 +78,42 @@
         <span>Google</span><span>Amazon</span><span>Hyundai</span><span>Nissan</span><span>Dacia</span><span>Coincola</span>
       </div>
     </section>
+    
+    <!-- Why Us -->
+    <section id="why-us" class="section">
+        <div class="grid-2">
+            <div>
+                 <h2 class="section-title reveal-text">Why Us?</h2>
+                 <p class="section-text reveal-text">We don't just make videos. We craft visual experiences that resonate with your audience and drive real results.</p>
+            </div>
+             <div class="placeholder-box reveal-text"><span>[ Concept Art ]</span></div>
+        </div>
+    </section>
 
-    <!-- About -->
+    <!-- About (Who We Are) -->
     <section class="section">
       <div class="grid-2">
         <div>
-          <h2 class="section-title">Who we are</h2>
-          <p class="section-text">We are an AI-powered video production studio, crafting advertising and marketing content for brands that want to stand out.</p>
-          <p class="section-text" style="margin-top: 1.2rem;">Combining cutting-edge technology with creative vision to produce content that drives results.</p>
+          <h2 class="section-title reveal-text">Who we are</h2>
+          <p class="section-text reveal-text">We are an AI-powered video production studio, crafting advertising and marketing content for brands that want to stand out.</p>
+          <p class="section-text reveal-text" style="margin-top: 1.2rem;">Combining cutting-edge technology with creative vision to produce content that drives results.</p>
           <a href="contact.html" class="btn-primary" style="margin-top: 2.5rem;">Get in touch</a>
         </div>
-        <div class="placeholder-box"><span>[ Photo ]</span></div>
-      </div>
-    </section>
-
-    <!-- Works -->
-    <section class="section" style="border-top: 1px solid rgba(255,255,255,0.3);">
-      <h2 class="section-title" style="margin-bottom: 3rem;">Selected works</h2>
-      <div class="projects-grid">
-        <div class="project-card"><span>[ Project 1 ]</span></div>
-        <div class="project-card"><span>[ Project 2 ]</span></div>
-        <div class="project-card"><span>[ Project 3 ]</span></div>
-        <div class="project-card"><span>[ Project 4 ]</span></div>
+        <div class="placeholder-box reveal-text"><span>[ Photo ]</span></div>
       </div>
     </section>
 
     <!-- Contact -->
     <section class="contact-section">
-      <h2 class="contact-title">Let's create together</h2>
-      <p class="contact-text">Ready to elevate your brand with compelling video content?</p>
+      <h2 class="contact-title reveal-text">Let's create together</h2>
+      <p class="contact-text reveal-text">Ready to elevate your brand with compelling video content?</p>
       <a href="mailto:hello@peak.studio" class="btn-primary">Start a project</a>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-content">
-        <span>© 2025 peak.</span>
+        <span>© 2026 peak.</span>
         <span>Tel Aviv, Israel</span>
       </div>
     </footer>
@@ -643,7 +204,7 @@
       }
     }
 
-    // GradientBackground class - LIGHT VIOLET-BLUE THEME
+    // GradientBackground class - DARK THEME
     class GradientBackground {
       constructor(sceneManager) {
         this.sceneManager = sceneManager;
@@ -651,18 +212,18 @@
         this.uniforms = {
           uTime: { value: 0 },
           uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-          // Light violet-blue color palette
-          uColor1: { value: new THREE.Vector3(0.388, 0.4, 0.973) },   // #6366f1 - Indigo
-          uColor2: { value: new THREE.Vector3(0.545, 0.361, 0.965) }, // #8b5cf6 - Violet
-          uColor3: { value: new THREE.Vector3(0.231, 0.510, 0.965) }, // #3b82f6 - Blue
-          uColor4: { value: new THREE.Vector3(0.655, 0.545, 0.980) }, // #a78bfa - Light Violet
-          uColor5: { value: new THREE.Vector3(0.376, 0.647, 0.980) }, // #60a5fa - Light Blue
-          uColor6: { value: new THREE.Vector3(0.506, 0.451, 0.976) }, // #8173f9 - Purple
-          uSpeed: { value: 0.3 },
-          uIntensity: { value: 1.2 },
+          // Light Pastel Palette
+          uColor1: { value: new THREE.Color('#e0d8ff') },
+          uColor2: { value: new THREE.Color('#d8e0ff') },
+          uColor3: { value: new THREE.Color('#ffe0ea') },
+          uColor4: { value: new THREE.Color('#e0f7fa') },
+          uColor5: { value: new THREE.Color('#e0d8ff') },
+          uColor6: { value: new THREE.Color('#d8e0ff') },
+          uSpeed: { value: 0.2 },
+          uIntensity: { value: 1.4 },
           uTouchTexture: { value: null },
           uGrainIntensity: { value: 0.03 },
-          uBaseColor: { value: new THREE.Vector3(0.96, 0.953, 1.0) }, // #f5f3ff - Light lavender base
+          uBaseColor: { value: new THREE.Color('#f5f3ff') },
         };
       }
       init() {
@@ -893,7 +454,45 @@
       loader.classList.add('hidden');
       document.body.classList.remove('loading');
       mainContent.classList.add('visible');
+      
+      // Trigger hero animations
+      setTimeout(() => {
+          document.querySelectorAll('#hero-cover .reveal-text').forEach((el, index) => {
+              setTimeout(() => el.classList.add('visible'), index * 200);
+          });
+      }, 500);
     }
+
+    // Scroll Animation (Intersection Observer)
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section .reveal-text').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Clock Logic
+    function updateClock() {
+        const clock = document.getElementById('clock');
+        if(clock) {
+            const now = new Date();
+            const days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+            clock.innerText = now.toLocaleTimeString('en-US', { hour12: true }) + ", " + days[now.getDay()];
+        }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
   </script>
 </body>
 </html>
