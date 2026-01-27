@@ -212,27 +212,32 @@ body.loading {
 /* ===== MARQUEE ===== */
 .marquee-container {
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 5rem 0;
   position: relative;
   z-index: 10;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .marquee {
   display: flex;
-  gap: 4rem;
-  animation: marquee 20s linear infinite;
+  width: max-content;
+  animation: marquee 25s linear infinite;
 }
 
 @keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); }
+  100% { transform: translateX(-50%); }
 }
 
 .marquee span {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: rgb(75, 85, 99);
+  font-size: 2rem;
+  font-weight: 500;
+  color: #111;
   white-space: nowrap;
+  padding-right: 6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   transition: color 0.3s;
 }
 
