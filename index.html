@@ -28,41 +28,11 @@
 
     <!-- Typographic Cover -->
     <section id="hero-cover">
-        <!-- Top Bar -->
-        <div class="cover-bar top">
-            <div class="bar-left">PEAK:2026</div>
-            <div class="bar-center">PEAK STUDIOS</div>
-            <div class="bar-right">©2026</div>
-        </div>
-
         <!-- Center Stage -->
         <div class="cover-center">
             <h1 class="main-title reveal-text">YOUR GOALS. OUR SPARK.<br>PEAK RESULTS.</h1>
             <h2 class="subtitle reveal-text">ADAPTIVE CREATIVE PROFESSIONAL EFFICIENT.</h2>
         </div>
-
-        <!-- Bottom Bar -->
-        <div class="cover-bar bottom">
-            <div class="bar-left">AVAIL: NOW</div>
-            <div class="bar-center">
-                <!-- Scroll Down Animation moved here -->
-                <div class="scroll-downs-wrapper">
-                    <div class="scroll-downs">
-                        <div class="mousey">
-                            <div class="scroller"></div>
-                        </div>
-                    </div>
-                </div>
-                <a href="contact.html" class="cover-link">CONTACT</a>
-            </div>
-            <div class="bar-right" id="clock">00:00:00 PM, FR</div>
-        </div>
-        
-        <!-- Decorations -->
-        <div class="marker top-left">+</div>
-        <div class="marker top-right">+</div>
-        <div class="marker bottom-left">+</div>
-        <div class="marker bottom-right">+</div>
     </section>
 
     <!-- Showreel -->
@@ -528,18 +498,6 @@
     document.querySelectorAll('.section .reveal-text').forEach(el => {
       observer.observe(el);
     });
-
-    // Clock Logic
-    function updateClock() {
-        const clock = document.getElementById('clock');
-        if(clock) {
-            const now = new Date();
-            const days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
-            clock.innerText = now.toLocaleTimeString('en-US', { hour12: true }) + ", " + days[now.getDay()];
-        }
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
   </script>
 </body>
 </html>
