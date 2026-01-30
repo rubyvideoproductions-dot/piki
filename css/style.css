@@ -185,14 +185,56 @@ body.loading {
 }
 
 /* ===== VIDEO CONTAINER ===== */
-.video-container {
-  width: 80vw;
-  max-width: 1200px;
+#showreel {
+  padding: 0 !important;
+  margin-top: -30vh !important;
+  width: 100%;
+  max-width: 100vw !important;
+  position: relative;
+  z-index: 20;
+}
+
+#videoCard, .video-container {
+  position: relative;
+  --pointer-°: 0deg;
+  --pointer-d: 0;
+  width: 85%;
+  margin: 0 auto;
   border-radius: 24px;
+  border: none !important;
+  outline: none !important;
   overflow: hidden;
   box-shadow: 0 25px 80px -20px rgba(255, 50, 100, 0.4);
+  background: rgba(245, 243, 255, 0.2);
   mask-image: linear-gradient(to bottom, transparent, black 15%);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%);
+}
+
+.video-container .glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(224, 195, 252, 0.4) 0%,
+    rgba(142, 197, 252, 0.4) 33%,
+    rgba(255, 222, 233, 0.4) 66%,
+    transparent 100%
+  );
+  filter: blur(60px);
+  transform: 
+    translate(
+      calc(cos(var(--pointer-°)) * var(--pointer-d) * 1%),
+      calc(sin(var(--pointer-°)) * var(--pointer-d) * 1%)
+    )
+    scale(1.2);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.video-container:hover .glow {
+  opacity: 1;
 }
 
 .video-wrapper {
@@ -496,44 +538,6 @@ body.loading {
   line-height: 1.6;
 }
 
-/* Adapt Video Card to use the same logic */
-.video-container {
-  position: relative;
-  --pointer-°: 0deg;
-  --pointer-d: 0;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.1);
-  background: rgba(245, 243, 255, 0.2);
-}
-
-.video-container .glow {
-  position: absolute;
-  inset: 0;
-  z-index: 1; /* Above video for effect? Or below? Let's go below or semi-transparent above */
-  pointer-events: none;
-  background: radial-gradient(
-    circle at center,
-    rgba(224, 195, 252, 0.4) 0%,
-    rgba(142, 197, 252, 0.4) 33%,
-    rgba(255, 222, 233, 0.4) 66%,
-    transparent 100%
-  );
-  filter: blur(60px);
-  transform: 
-    translate(
-      calc(cos(var(--pointer-°)) * var(--pointer-d) * 1%),
-      calc(sin(var(--pointer-°)) * var(--pointer-d) * 1%)
-    )
-    scale(1.2);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.video-container:hover .glow {
-  opacity: 1;
-}
-
 /* Why Us Grid */
 .why-us-grid {
   display: grid;
@@ -591,9 +595,6 @@ body.loading {
   }
   .hero {
     padding-top: 100px;
-  }
-  .video-container {
-    width: 90vw;
   }
   .section {
     padding: 4rem 1.5rem;
