@@ -656,12 +656,15 @@ body.loading {
 
 /* Mobile adaptation for scroll-down button */
 @media (max-width: 768px) {
+  #hero-cover {
+    height: 80vh;
+    padding-top: 12vh;
+  }
+  .cover-center {
+    padding-top: calc(2vh + 60px);
+  }
   .scroll-down {
-    bottom: calc(35vh - 10px);
-    width: 22px;
-    height: 22px;
-    margin-left: -11px;
-    border-width: 2px;
+    display: none !important;
   }
   
   .scroll-down:before {
@@ -670,5 +673,9 @@ body.loading {
     top: calc(50% - 5px);
     left: calc(50% - 5px);
     border-width: 0 0 2px 2px;
+  }
+
+  #showreel {
+    margin-top: -20vh !important;
   }
 }
