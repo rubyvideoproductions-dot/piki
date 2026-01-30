@@ -51,7 +51,7 @@
 
     <!-- Showreel -->
     <section id="showreel" class="section">
-      <div class="video-container reveal-text" id="videoCard" style="width: 100%; max-width: none;">
+      <div class="video-container" id="videoCard" style="width: 85%; max-width: none; opacity: 0.9; transform: translateY(50px);">
         <span class="glow"></span>
         <div class="video-wrapper">
            <iframe src="https://player.vimeo.com/video/1152345652?autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
@@ -512,6 +512,37 @@
     document.querySelectorAll('.section .reveal-text').forEach(el => {
       observer.observe(el);
     });
+
+    // Cinematic Transition for Video Card
+    function updateCinematicTransition() {
+      const videoCard = document.getElementById('videoCard');
+      if (!videoCard) return;
+      
+      const rect = videoCard.parentElement.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate progress: 0 when top of section is at bottom of viewport, 
+      // 1 when top of section reaches top of viewport
+      const progress = Math.min(Math.max((windowHeight - rect.top) / windowHeight, 0), 1);
+      
+      // Opacity: 0.85 to 1 (starts at ~0.9 when peeking 30%)
+      const opacity = 0.85 + (progress * 0.15);
+      
+      // Width: 78% to 100% (starts at ~85% when peeking 30%)
+      const width = 78 + (progress * 22);
+      
+      // Parallax: 150px to 0 (starts at ~50px when peeking 30%)
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const translateVal = 150 * (1 - easeProgress);
+      
+      videoCard.style.opacity = opacity;
+      videoCard.style.width = `${width}%`;
+      videoCard.style.transform = `translateY(${translateVal}px)`;
+    }
+
+    window.addEventListener('scroll', updateCinematicTransition);
+    // Initial call to set state
+    updateCinematicTransition();
   </script>
 </body>
 </html>
