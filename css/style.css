@@ -455,6 +455,54 @@ body.loading {
     color: rgba(0, 0, 0, 0.6);
 }
 
+/* ===== SCROLL DOWN BUTTON ===== */
+.scroll-down {
+  position: absolute;
+  bottom: 35vh;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #000000;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 100;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  transition: all .2s ease-in;
+  transform: scale(1);
+}
+
+.scroll-down:before {
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - 7px);
+  transform: rotate(-45deg);
+  display: block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  border: 3px solid #000000;
+  border-width: 0px 0 3px 3px;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.transition-fade {
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
 /* ===== GLOWING MESH GRADIENT CARD ===== */
 .glowing-card {
   --pointer-°: 0deg;

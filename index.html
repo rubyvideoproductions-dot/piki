@@ -47,6 +47,7 @@
             <h1 class="main-title reveal-text">YOUR GOALS. OUR SPARK.<br>PEAK RESULTS.</h1>
             <h2 class="subtitle reveal-text">ADAPTIVE CREATIVE PROFESSIONAL EFFICIENT.</h2>
         </div>
+        <a href="#showreel" class="scroll-down transition-fade"></a>
     </section>
 
     <!-- Showreel -->
@@ -566,6 +567,30 @@
     window.addEventListener('scroll', updateCinematicTransition);
     // Initial call to set state
     updateCinematicTransition();
+
+    // Scroll Down Button Logic
+    const scrollDownBtn = document.querySelector('.scroll-down');
+    if (scrollDownBtn) {
+      scrollDownBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector('#showreel');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      // Fade out on scroll
+      window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY;
+        if (scrollPos > 100) {
+          scrollDownBtn.style.opacity = '0';
+          scrollDownBtn.style.pointerEvents = 'none';
+        } else {
+          scrollDownBtn.style.opacity = '1';
+          scrollDownBtn.style.pointerEvents = 'all';
+        }
+      });
+    }
   </script>
 </body>
 </html>
