@@ -653,3 +653,22 @@ body.loading {
     gap: 2rem;
   }
 }
+
+/* Mobile adaptation for scroll-down button */
+@media (max-width: 768px) {
+  .scroll-down {
+    bottom: calc(35vh - 10px);
+    width: 22px;
+    height: 22px;
+    margin-left: -11px;
+    border-width: 2px;
+  }
+  
+  .scroll-down:before {
+    width: 8px;
+    height: 8px;
+    top: calc(50% - 5px);
+    left: calc(50% - 5px);
+    border-width: 0 0 2px 2px;
+  }
+}
