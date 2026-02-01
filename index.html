@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/scroll-effect.css">
 </head>
 <body class="loading">
 
@@ -60,87 +61,39 @@
       </div>
     </section>
 
-    <!-- Services Marquee -->
-    <section class="marquee-container">
-      <div class="marquee">
-        <span>DRONES</span><span>MOTION DESIGN</span><span>3D ANIMATION</span><span>MUSIC VIDEOS</span><span>BROADCAST</span><span>TECH SHOWREELS</span><span>STARTUP ADS</span><span>CREATIVE DIRECTION</span>
-        <span>DRONES</span><span>MOTION DESIGN</span><span>3D ANIMATION</span><span>MUSIC VIDEOS</span><span>BROADCAST</span><span>TECH SHOWREELS</span><span>STARTUP ADS</span><span>CREATIVE DIRECTION</span>
-      </div>
-    </section>
-    
-    <!-- Why Us -->
-    <section id="why-us" class="section">
-        <div class="container">
-            <h2 class="section-title reveal-text">Why Us?</h2>
-            <p class="section-text reveal-text">We don't just make videos. We craft visual experiences that resonate with your audience and drive real results.</p>
-            
-            <div class="why-us-grid">
-                <!-- Card 1 -->
-                <div class="glowing-card reveal-text">
-                    <div class="glow"></div>
-                    <div class="card-icon">⚡</div>
-                    <h3 class="card-title">Adaptive</h3>
-                    <p class="card-desc">AI-powered workflows that evolve with your project's needs, ensuring maximum efficiency.</p>
-                </div>
-                
-                <!-- Card 2 -->
-                <div class="glowing-card reveal-text">
-                    <div class="glow"></div>
-                    <div class="card-icon">🎨</div>
-                    <h3 class="card-title">Creative</h3>
-                    <p class="card-desc">Bold visual storytelling that breaks through the noise and captures your brand's essence.</p>
-                </div>
-                
-                <!-- Card 3 -->
-                <div class="glowing-card reveal-text">
-                    <div class="glow"></div>
-                    <div class="card-icon">💎</div>
-                    <h3 class="card-title">Professional</h3>
-                    <p class="card-desc">High-end production quality delivered by a team of experts dedicated to excellence.</p>
-                </div>
-                
-                <!-- Card 4 -->
-                <div class="glowing-card reveal-text">
-                    <div class="glow"></div>
-                    <div class="card-icon">🚀</div>
-                    <h3 class="card-title">Efficient</h3>
-                    <p class="card-desc">Fast turnaround times without compromising on quality, keeping you ahead of the curve.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About (Who We Are) -->
-    <section class="section">
-      <div class="grid-2">
-        <div>
-          <h2 class="section-title reveal-text">Who we are</h2>
-          <p class="section-text reveal-text">We are an AI-powered video production studio, crafting advertising and marketing content for brands that want to stand out.</p>
-          <p class="section-text reveal-text" style="margin-top: 1.2rem;">Combining cutting-edge technology with creative vision to produce content that drives results.</p>
-          <a href="contact.html" class="btn-primary" style="margin-top: 2.5rem;">Get in touch</a>
-        </div>
-        <div class="placeholder-box reveal-text"><span>[ Photo ]</span></div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact-section">
-      <h2 class="contact-title reveal-text">Let's create together</h2>
-      <p class="contact-text reveal-text">Ready to elevate your brand with compelling video content?</p>
-      <a href="mailto:hello@peak.studio" class="btn-primary">Start a project</a>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <span>© 2026 peak.</span>
-        <span>Tel Aviv, Israel</span>
-      </div>
-    </footer>
+    <header class="scroll-header">
+      <h1 class="fluid">we can<br />create.</h1>
+    </header>
+    <main class="scroll-container">
+      <section class="content-section fluid">
+        <h2><span aria-hidden="true">we can&nbsp;</span>
+          <span class="sr-only">we can build things.</span>
+        </h2>
+        <ul class="scroll-list" aria-hidden="true" style="--count: 10">
+          <li style="--i: 0">motion design.</li>
+          <li style="--i: 1">3d animation.</li>
+          <li style="--i: 2">music videos.</li>
+          <li style="--i: 3">broadcast.</li>
+          <li style="--i: 4">commercials.</li>
+          <li style="--i: 5">tech reels.</li>
+          <li style="--i: 6">drones.</li>
+          <li style="--i: 7">storytelling.</li>
+          <li style="--i: 8">production.</li>
+          <li style="--i: 9">excellence.</li>
+        </ul>
+      </section>
+      <section class="content-section">
+        <h2 class="fluid">peak.</h2>
+      </section>
+    </main>
+    <footer class="scroll-footer">© 2026 peak.</footer>
   </div>
 
   <!-- Three.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
     // TouchTexture class
     class TouchTexture {
@@ -591,6 +544,122 @@
         }
       });
     }
+
+    // --- SCROLL EFFECT LOGIC ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Set initial state
+    document.documentElement.dataset.theme = 'dark';
+    document.documentElement.dataset.syncScrollbar = 'true';
+    document.documentElement.dataset.animate = 'true';
+    document.documentElement.dataset.snap = 'true';
+
+    const scrollHeader = document.querySelector('.scroll-header');
+    const showreel = document.querySelector('#showreel');
+
+    if (scrollHeader && showreel) {
+      gsap.fromTo(scrollHeader, 
+        { 
+          opacity: 0, 
+          scale: 0.8, 
+          filter: 'blur(15px)',
+          y: 100 
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          y: 0,
+          scrollTrigger: {
+            trigger: showreel,
+            start: 'bottom 95%',
+            end: 'bottom 40%',
+            scrub: 1,
+            invalidateOnRefresh: true,
+          }
+        }
+      );
+
+      gsap.to('.scroll-header h1', {
+        y: -120,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: scrollHeader,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+    }
+
+    // Animate the items in the scroll-list
+    const items = gsap.utils.toArray('.scroll-list li');
+    if (items.length > 0) {
+      gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) });
+
+      const dimmer = gsap.timeline()
+        .to(items.slice(1), { opacity: 1, stagger: 0.5 })
+        .to(items.slice(0, items.length - 1), { opacity: 0.2, stagger: 0.5 }, 0);
+
+      ScrollTrigger.create({
+        trigger: items[0],
+        endTrigger: items[items.length - 1],
+        start: 'center center',
+        end: 'center center',
+        animation: dimmer,
+        scrub: 0.2,
+      });
+
+      // Hue transition for the scroll-list
+      const scroller = gsap.timeline().fromTo(
+        document.documentElement,
+        { '--hue': 240 },
+        { '--hue': 350, ease: 'none' }
+      );
+
+      ScrollTrigger.create({
+        trigger: items[0],
+        endTrigger: items[items.length - 1],
+        start: 'center center',
+        end: 'center center',
+        animation: scroller,
+        scrub: 0.2,
+      });
+
+      // Chroma entry/exit
+      gsap.fromTo(document.documentElement,
+        { '--chroma': 0 },
+        {
+          '--chroma': 0.3,
+          ease: 'none',
+          scrollTrigger: {
+            scrub: 0.2,
+            trigger: items[0],
+            start: 'center center+=40',
+            end: 'center center',
+          }
+        }
+      );
+      gsap.fromTo(document.documentElement,
+        { '--chroma': 0.3 },
+        {
+          '--chroma': 0,
+          ease: 'none',
+          scrollTrigger: {
+            scrub: 0.2,
+            trigger: items[items.length - 2],
+            start: 'center center',
+            end: 'center center-=40',
+          }
+        }
+      );
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 1000);
+    });
   </script>
 </body>
 </html>
