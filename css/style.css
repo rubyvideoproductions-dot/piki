@@ -1,6 +1,16 @@
 /* ===== RESET & BASE ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
 body {
   background: transparent;
   font-family: system-ui, -apple-system, sans-serif;
@@ -33,7 +43,7 @@ body.loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .loader-container.hidden {
@@ -49,30 +59,49 @@ body.loading {
   transform: scale(1.5); /* Scale up as requested */
 }
 
-.loader-text {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: clamp(2.5rem, 5vw, 3rem);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-  text-transform: lowercase;
-}
-
-.loader-svg {
-  width: 150px;
+.loader-logo {
+  width: 120px;
   height: auto;
+  filter: invert(1) brightness(2); /* Ensure visibility on black background */
+  opacity: 0;
+  
+  /* Left-to-right fade reveal */
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 70%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  
+  animation: 
+    revealLogo 3s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    pulseLogo 2.5s ease-in-out 3s infinite;
 }
 
-.mountain-path {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: drawPath 3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+@keyframes revealLogo {
+  0% {
+    opacity: 0;
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+    transform: scale(1);
+  }
 }
 
-@keyframes drawPath {
-  0% { stroke-dashoffset: 100; }
-  100% { stroke-dashoffset: 0; }
+@keyframes pulseLogo {
+  0%, 100% {
+    opacity: 1;
+    filter: invert(1) brightness(2) drop-shadow(0 0 0px rgba(255,255,255,0));
+  }
+  50% {
+    opacity: 0.8;
+    filter: invert(1) brightness(2.5) drop-shadow(0 0 15px rgba(255,255,255,0.3));
+  }
 }
 
 /* ===== MAIN CONTENT ===== */

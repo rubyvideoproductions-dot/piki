@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 @layer scroll-effect {
-  @layer normalize, base, demo, stick, effect, scrollbar, debug;
+  @layer normalize, base, demo, stick, effect, debug;
 
   @layer debug {
     [data-debug='true'] li {
@@ -9,54 +9,6 @@
     }
     [data-debug='true'] :is(h2, li:last-of-type) {
       outline: 0.05em dashed canvasText;
-    }
-  }
-
-  @layer scrollbar {
-    @property --hue {
-      initial-value: 0;
-      syntax: '<number>';
-      inherits: false;
-    }
-    @property --chroma {
-      initial-value: 0;
-      syntax: '<number>';
-      inherits: true;
-    }
-
-    [data-sync-scrollbar='true'] {
-      scrollbar-color: oklch(var(--lightness) var(--chroma) var(--hue)) #0000;
-    }
-    @supports (animation-timeline: scroll()) and (animation-range: 0% 100%) {
-      [data-sync-scrollbar='true'][data-animate='true'] {
-        timeline-scope: --list;
-        scrollbar-color: oklch(var(--lightness) var(--chroma, 0) var(--hue)) #0000;
-        animation-name: change, chroma-on, chroma-off;
-        animation-fill-mode: both;
-        animation-timing-function: linear;
-        animation-range: entry 50% exit 50%, entry 40% entry 50%,
-          exit 30% exit 40%;
-        animation-timeline: --list;
-        ul {
-          view-timeline: --list;
-        }
-      }
-    }
-
-    @keyframes change {
-      to {
-        --hue: var(--end);
-      }
-    }
-    @keyframes chroma-on {
-      to {
-        --chroma: 0.3;
-      }
-    }
-    @keyframes chroma-off {
-      to {
-        --chroma: 0;
-      }
     }
   }
 
