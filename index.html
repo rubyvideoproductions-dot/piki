@@ -18,7 +18,7 @@
       <div class="loader-content">
         <h1 class="loader-text">peak.</h1>
         <svg viewBox="0 0 100 60" class="loader-svg">
-            <path d="M10 50 L35 30 L50 45 L75 20 L95 50" class="mountain-path" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
+            <path d="M10 50 L35 30 L50 45 L75 20 L95 50" class="mountain-path" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
         </svg>
       </div>
   </div>
@@ -46,7 +46,6 @@
         <!-- Center Stage -->
         <div class="cover-center">
             <h1 class="main-title reveal-text">YOUR GOALS. OUR SPARK.<br>PEAK RESULTS.</h1>
-            <h2 class="subtitle reveal-text">ADAPTIVE CREATIVE PROFESSIONAL EFFICIENT.</h2>
         </div>
         <a href="#showreel" class="scroll-down transition-fade"></a>
     </section>
@@ -185,18 +184,18 @@
         this.uniforms = {
           uTime: { value: 0 },
           uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-          // Original Pastel Palette
-          uColor1: { value: new THREE.Color('#e0c3fc') },
-          uColor2: { value: new THREE.Color('#8ec5fc') },
-          uColor3: { value: new THREE.Color('#ffdee9') },
-          uColor4: { value: new THREE.Color('#e0c3fc') },
-          uColor5: { value: new THREE.Color('#8ec5fc') },
-          uColor6: { value: new THREE.Color('#ffdee9') },
+          // Dark/Deep Purple/Burgundy Palette
+          uColor1: { value: new THREE.Color('#4a0e2e') }, // Deep Burgundy
+          uColor2: { value: new THREE.Color('#2e003e') }, // Deep Purple
+          uColor3: { value: new THREE.Color('#1a0b2e') }, // Dark Violet
+          uColor4: { value: new THREE.Color('#3d001d') }, // Deep Burgundy Variant
+          uColor5: { value: new THREE.Color('#190028') }, // Very Dark Purple
+          uColor6: { value: new THREE.Color('#000000') }, // Black
           uSpeed: { value: 0.2 },
           uIntensity: { value: 1.4 },
           uTouchTexture: { value: null },
           uGrainIntensity: { value: 0.03 },
-          uBaseColor: { value: new THREE.Color('#f5f3ff') },
+          uBaseColor: { value: new THREE.Color('#121212') }, // Dark Gray Base
         };
       }
       init() {

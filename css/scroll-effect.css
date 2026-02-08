@@ -64,11 +64,11 @@
     :root {
       --start: 240;
       --end: 350;
-      --lightness: 65%;
+      --lightness: 80%; /* Increased lightness for dark background */
       --base-chroma: 0.3;
     }
     [data-theme='dark'] {
-      --lightness: 75%;
+      --lightness: 80%;
     }
     [data-theme='light'] {
       --lightness: 65%;
@@ -169,8 +169,8 @@
     .scroll-list li:last-of-type,
     section.content-section h2 {
       background: linear-gradient(
-        canvasText 50%,
-        color-mix(in oklch, canvas, canvasText 25%)
+        #ffffff 50%,
+        rgba(255, 255, 255, 0.4)
       );
       background-clip: text;
       color: #0000;
@@ -211,8 +211,8 @@
       line-height: 0.8;
       margin: 0;
       background: linear-gradient(
-        #111 60%,
-        rgba(17, 17, 17, 0.4)
+        #ffffff 60%,
+        rgba(255, 255, 255, 0.4)
       );
       background-clip: text;
       -webkit-background-clip: text;
@@ -278,8 +278,8 @@
     .scroll-list li:last-of-type,
     section.content-section h2 {
       background: linear-gradient(
-        #111 50%,
-        rgba(17, 17, 17, 0.4)
+        #ffffff 50%,
+        rgba(255, 255, 255, 0.4)
       );
       background-clip: text;
       -webkit-background-clip: text;
