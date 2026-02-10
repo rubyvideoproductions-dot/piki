@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>peak. | Works</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: #000;
+      min-height: 100vh;
+    }
+
+    .works-page {
+      position: relative;
+      z-index: 10;
+      padding: 10rem 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .works-page-header {
+      margin-bottom: 4rem;
+    }
+
+    .works-page-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: #ffffff;
+      text-transform: lowercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .works-page-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: #555;
+      text-transform: lowercase;
+      letter-spacing: 0.1em;
+    }
+
+    .works-page-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .work-card-video {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .work-card-placeholder {
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .work-card-placeholder:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .work-card-play {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.12);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .work-card-placeholder:hover .work-card-play {
+      color: rgba(255, 255, 255, 0.35);
+      transform: scale(1.1);
+    }
+
+    .work-card-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0 0.25rem;
+    }
+
+    .work-card-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: #ccc;
+    }
+
+    .work-card-category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #555;
+      text-transform: lowercase;
+      letter-spacing: 0.05em;
+    }
+
+    .works-page-footer {
+      margin-top: 6rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      .works-page {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .works-page-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .works-page-header {
+        margin-bottom: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-left">
+        <a href="works.html" class="nav-link">works</a>
+      </div>
+      <a href="index.html" class="logo">
+        <span class="logo-text">peak.</span>
+      </a>
+      <div class="nav-right">
+        <a href="contact.html" class="nav-link">contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="works-page">
+    <div class="works-page-grid">
+
+      <article class="work-card">
+        <div class="work-card-video">
+          <div class="work-card-placeholder">
+            <span class="work-card-play">&#9654;</span>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <h3 class="work-card-name">Project Title</h3>
+          <span class="work-card-category">commercial</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-card-video">
+          <div class="work-card-placeholder">
+            <span class="work-card-play">&#9654;</span>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <h3 class="work-card-name">Project Title</h3>
+          <span class="work-card-category">music video</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-card-video">
+          <div class="work-card-placeholder">
+            <span class="work-card-play">&#9654;</span>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <h3 class="work-card-name">Project Title</h3>
+          <span class="work-card-category">motion design</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-card-video">
+          <div class="work-card-placeholder">
+            <span class="work-card-play">&#9654;</span>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <h3 class="work-card-name">Project Title</h3>
+          <span class="work-card-category">brand film</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-card-video">
+          <div class="work-card-placeholder">
+            <span class="work-card-play">&#9654;</span>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <h3 class="work-card-name">Project Title</h3>
+          <span class="work-card-category">3d animation</span>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-card-video">
+          <div class="work-card-placeholder">
+            <span class="work-card-play">&#9654;</span>
+          </div>
+        </div>
+        <div class="work-card-info">
+          <h3 class="work-card-name">Project Title</h3>
+          <span class="work-card-category">documentary</span>
+        </div>
+      </article>
+
+    </div>
+
+    <footer class="works-page-footer">© 2026 peak.</footer>
+  </div>
+
+</body>
+</html>
