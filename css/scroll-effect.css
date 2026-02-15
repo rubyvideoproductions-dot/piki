@@ -79,7 +79,7 @@
       display: flex;
       line-height: 1.25;
       width: 100%;
-      padding-left: 5rem;
+      padding-left: 15vw;
     }
     section.content-section:last-of-type {
       min-height: 100vh;
@@ -87,10 +87,18 @@
       place-items: center;
       width: 100%;
       justify-content: center;
-
-      h2 {
-        --font-level: 6;
-      }
+      position: relative;
+    }
+    section.content-section:last-of-type::before {
+      content: '';
+      position: absolute;
+      top: -30vh;
+      left: 0;
+      right: 0;
+      height: 30vh;
+      background: linear-gradient(to bottom, transparent 0%, rgba(18, 18, 18, 0.85) 100%);
+      pointer-events: none;
+      z-index: 2;
     }
     main.scroll-container {
       width: 100%;
@@ -220,7 +228,7 @@
     .scroll-container, .scroll-header, .scroll-footer {
       font-family: 'Geist', 'SF Pro Text', 'SF Pro Icons', 'AOS Icons',
         'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
-      color: #111;
+      color: #e0e0e0;
     }
     
     .scroll-container h1.fluid { --font-level: 8; }
