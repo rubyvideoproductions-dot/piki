@@ -57,48 +57,16 @@
       </div>
     </section>
 
-    <!-- Our Core Values -->
-    <section id="core-values" class="section values-section">
-      <div class="container values-container">
-        <h2 class="section-heading reveal-text">Our Core Values</h2>
-        <div class="values-content">
-          <div class="value-block reveal-text">
-            <h3 class="value-title">Communication & Trust</h3>
-            <p class="value-text">We believe in the value of communication, putting our partners' trust and success at the center of our ideals.</p>
-          </div>
-          <div class="value-block reveal-text">
-            <h3 class="value-title">Peak Quality</h3>
-            <p class="value-text">Our team consists of experts across all aspects of video creation to ensure our content is at its peak quality.</p>
-          </div>
-          <div class="value-block reveal-text">
-            <h3 class="value-title">Your Story, Amplified</h3>
-            <p class="value-text">We pride ourselves on making the story of your brand come to life, helping you craft original ideas to enhance your brand's identity.</p>
-          </div>
+    <!-- Why Peak — Parallax -->
+    <section id="why-peak" class="why-peak-parallax">
+      <div class="why-peak-pin">
+        <div class="wp-stage">
+          <span class="wp-why">Why</span>
+          <span class="wp-peak">Peak.</span>
         </div>
-      </div>
-    </section>
-
-    <!-- What We Do Best -->
-    <section id="what-we-do" class="section what-we-do-section">
-      <div class="container what-we-do-container">
-        <h2 class="section-heading reveal-text">What We Do Best</h2>
-        <div class="what-we-do-grid">
-          <div class="what-we-do-item reveal-text">
-            <span class="what-we-do-number">01</span>
-            <h3 class="what-we-do-item-title">Crafting Tailor-Made Original Ideas</h3>
-          </div>
-          <div class="what-we-do-item reveal-text">
-            <span class="what-we-do-number">02</span>
-            <h3 class="what-we-do-item-title">Making Your Brand's Story Stand Out Visually</h3>
-          </div>
-          <div class="what-we-do-item reveal-text">
-            <span class="what-we-do-number">03</span>
-            <h3 class="what-we-do-item-title">Reaching Above Your Standards</h3>
-          </div>
-        </div>
-        <div class="what-we-do-description reveal-text">
-          <p>We make the story of your brand visual and executable to your audience. In addition, we have vast experience in all worlds of video creation — from video and editing to 3D and AI videos.</p>
-        </div>
+        <p class="wp-line wp-line--1" id="wpLine1">We don't just create content.</p>
+        <p class="wp-line wp-line--2" id="wpLine2">We help shape the way your brand is <em>seen</em>, <em>felt</em>, and <em>remembered</em>.</p>
+        <p class="wp-line wp-line--3" id="wpLine3">Our partners' trust and their success guide every decision we make.</p>
       </div>
     </section>
 
@@ -115,6 +83,9 @@
               <div class="work-preview-placeholder">
                 <span class="work-preview-play">&#9654;</span>
               </div>
+              <div class="work-hover-overlay">
+                <span class="work-hover-title">Project Title</span>
+              </div>
             </div>
             <div class="work-preview-info">
               <h3 class="work-preview-name">Project Title</h3>
@@ -125,6 +96,9 @@
             <div class="work-preview-video">
               <div class="work-preview-placeholder">
                 <span class="work-preview-play">&#9654;</span>
+              </div>
+              <div class="work-hover-overlay">
+                <span class="work-hover-title">Project Title</span>
               </div>
             </div>
             <div class="work-preview-info">
@@ -772,6 +746,69 @@
         }
       });
     }
+
+    // === WHY PEAK PARALLAX ===
+    (function() {
+      const pin = document.querySelector('.why-peak-pin');
+      if (!pin) return;
+
+      const stage = document.querySelector('.wp-stage');
+      const line1 = document.getElementById('wpLine1');
+      const line2 = document.getElementById('wpLine2');
+      const line3 = document.getElementById('wpLine3');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.why-peak-parallax',
+          start: 'top top',
+          end: '+=250%',
+          pin: '.why-peak-pin',
+          pinSpacing: true,
+          scrub: 1,
+        }
+      });
+
+      // Phase 1: "Why Peak." visible, hold, then move up — line 1 appears below
+      tl.to(stage, {
+        y: '-18vh',
+        duration: 1,
+        ease: 'power2.inOut',
+      }, 0.8)
+      .fromTo(line1,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+        1.2
+      )
+
+      // Phase 2: Line 1 out, line 2 in
+      .to(line1, {
+        opacity: 0, y: -15,
+        duration: 0.6, ease: 'power2.in',
+      }, 2.4)
+      .fromTo(line2,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+        2.7
+      )
+
+      // Phase 3: Line 2 out, line 3 in
+      .to(line2, {
+        opacity: 0, y: -15,
+        duration: 0.6, ease: 'power2.in',
+      }, 3.9)
+      .fromTo(line3,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+        4.2
+      )
+
+      // Phase 4: Everything fades out
+      .to([stage, line3], {
+        opacity: 0,
+        duration: 0.8, ease: 'power2.in',
+      }, 5.4);
+
+    })();
 
     window.addEventListener('load', () => {
       setTimeout(() => {

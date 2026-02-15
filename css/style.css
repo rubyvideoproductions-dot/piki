@@ -783,115 +783,65 @@ body.loading {
   letter-spacing: -0.02em;
 }
 
-/* ===== OUR CORE VALUES ===== */
-.values-section {
+/* ===== WHY PEAK — PARALLAX ===== */
+.why-peak-parallax {
   position: relative;
   z-index: 10;
-  padding: 8rem 2rem;
 }
 
-.values-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
+.why-peak-pin {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.values-content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
+/* --- Heading: Why Peak. together --- */
+.wp-stage {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35em;
+  white-space: nowrap;
+  will-change: transform, opacity;
 }
 
-.value-block {
-  padding: 2.5rem 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  transition: border-color 0.4s ease, background 0.4s ease;
-  text-align: left;
-}
-
-.value-block:hover {
-  border-color: rgba(255, 80, 128, 0.25);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.value-title {
+.wp-why,
+.wp-peak {
   font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 700;
   color: #ffffff;
-  margin-bottom: 1rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
-.value-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.7;
-}
-
-/* ===== WHAT WE DO BEST ===== */
-.what-we-do-section {
-  position: relative;
-  z-index: 10;
-  padding: 6rem 2rem 8rem;
-}
-
-.what-we-do-container {
-  max-width: 1000px;
-  margin: 0 auto;
+/* --- Text lines --- */
+.wp-line {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, 0);
   text-align: center;
-}
-
-.what-we-do-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-}
-
-.what-we-do-item {
-  padding: 2rem 1.5rem;
-  text-align: left;
-  border-left: 2px solid rgba(255, 80, 128, 0.3);
-  transition: border-color 0.3s ease;
-}
-
-.what-we-do-item:hover {
-  border-left-color: rgba(255, 80, 128, 0.7);
-}
-
-.what-we-do-number {
   font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
   font-weight: 400;
-  color: rgba(255, 80, 128, 0.6);
-  letter-spacing: 0.1em;
-  display: block;
-  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: -0.01em;
+  line-height: 1.7;
+  max-width: 600px;
+  width: 85%;
+  opacity: 0;
+  will-change: opacity, transform;
 }
 
-.what-we-do-item-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #ffffff;
-  line-height: 1.4;
-}
-
-.what-we-do-description {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.what-we-do-description p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.75;
+.wp-line em {
+  font-style: normal;
+  color: #ff5080;
 }
 
 /* ===== SELECTED WORKS PREVIEW ===== */
@@ -988,6 +938,49 @@ body.loading {
 .works-preview-cta {
   text-align: center;
   margin-top: 3rem;
+}
+
+/* ===== WORK HOVER OVERLAY (shared) ===== */
+.work-hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.work-preview-video:hover .work-hover-overlay,
+.work-card-video:hover .work-hover-overlay {
+  opacity: 1;
+}
+
+.work-hover-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  transform: translateY(8px);
+  transition: transform 0.4s ease;
+}
+
+.work-preview-video:hover .work-hover-title,
+.work-card-video:hover .work-hover-title {
+  transform: translateY(0);
+}
+
+/* Hide play icon on hover when overlay is active */
+.work-preview-video:hover .work-preview-play,
+.work-card-video:hover .work-card-play {
+  opacity: 0;
 }
 
 /* ===== SCROLL END LOGO ===== */
@@ -1193,15 +1186,10 @@ body.loading {
     bottom: 5vh;
   }
 
-  /* New sections mobile */
-  .values-content {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .what-we-do-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  /* Why Peak parallax mobile */
+  .wp-line {
+    width: 92%;
+    max-width: 100%;
   }
 
   .works-preview-grid {
