@@ -89,7 +89,7 @@
           <article class="work-preview-card reveal-text">
             <div class="work-preview-video" data-youtube-id="sVxZ4Pma1sg">
               <div class="work-preview-player">
-                <iframe src="https://www.youtube.com/embed/sVxZ4Pma1sg?autoplay=1&mute=1&loop=1&playlist=sVxZ4Pma1sg&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+                <img src="https://img.youtube.com/vi/sVxZ4Pma1sg/maxresdefault.jpg" alt="" class="work-preview-thumb">
               </div>
               <div class="work-play-btn">
                 <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
@@ -755,19 +755,28 @@
     // === VIDEO PLAYER CLICK-TO-PLAY ===
     document.querySelectorAll('.work-play-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const card = btn.closest('.work-preview-video') || btn.closest('.work-card-video');
+        const card = btn.closest('.work-preview-video') || btn.closest('.work-card-video') || btn.closest('.works-showreel-video');
         if (!card || card.classList.contains('active')) return;
 
         const vimeoId = card.dataset.vimeoId;
         const youtubeId = card.dataset.youtubeId;
 
         card.classList.add('active');
-        const iframe = card.querySelector('iframe');
 
         if (vimeoId) {
+          const iframe = card.querySelector('iframe');
           iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479`;
         } else if (youtubeId) {
+          const player = card.querySelector('.work-preview-player') || card.querySelector('.work-card-player');
+          const thumb = player.querySelector('img');
+          const iframe = document.createElement('iframe');
           iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+          iframe.frameBorder = '0';
+          iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+          iframe.allowFullscreen = true;
+          iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+          if (thumb) thumb.remove();
+          player.appendChild(iframe);
         }
       });
     });

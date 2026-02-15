@@ -777,10 +777,10 @@ body.loading {
 .section-heading {
   font-family: 'Inter', sans-serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 300;
+  font-weight: 700;
   color: #ffffff;
   text-align: center;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 /* ===== WHY PEAK — PARALLAX ===== */
@@ -857,7 +857,6 @@ body.loading {
   position: relative;
   z-index: 20;
   padding: 6rem 2rem 8rem;
-  background: #121212;
 }
 
 .works-preview-header {
@@ -908,6 +907,15 @@ body.loading {
   height: 100%;
   border: none;
   pointer-events: none;
+}
+
+.work-preview-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .work-preview-video.active .work-preview-player iframe {
