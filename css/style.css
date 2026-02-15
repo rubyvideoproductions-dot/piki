@@ -1076,44 +1076,74 @@ body.loading {
 .cta-section {
   position: relative;
   z-index: 10;
-  padding: 8rem 2rem;
+  padding: 12rem 2rem 10rem;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
 }
 
 .cta-content {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #ff5080;
+  margin-bottom: 2rem;
 }
 
 .cta-heading {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 600;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700;
   color: #ffffff;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
+  margin-bottom: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-align: center;
 }
 
 .cta-text {
   font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 3.5rem;
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 480px;
+  text-align: center;
 }
 
 .cta-button {
-  font-size: 1rem;
-  padding: 1.1rem 2.5rem;
-  letter-spacing: 0.08em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  padding: 1.2rem 3.5rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px -10px rgba(255, 50, 100, 0.5);
 }
 
 /* ===== SITE FOOTER ===== */
 .site-footer {
   position: relative;
   z-index: 10;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
