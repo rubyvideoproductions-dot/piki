@@ -105,30 +105,6 @@
       </div>
     </section>
 
-    <!-- We Are Scroll Effect -->
-    <main class="scroll-container">
-      <section class="content-section fluid">
-        <h2><span aria-hidden="true">We Are&nbsp;</span>
-          <span class="sr-only">We are peak.</span>
-        </h2>
-        <ul class="scroll-list" aria-hidden="true" style="--count: 10">
-          <li style="--i: 0">Video creators.</li>
-          <li style="--i: 1">Creative directors.</li>
-          <li style="--i: 2">Editors.</li>
-          <li style="--i: 3">Writers.</li>
-          <li style="--i: 4">3D Animators.</li>
-          <li style="--i: 5">Story tellers.</li>
-          <li style="--i: 6">Production experts.</li>
-          <li style="--i: 7">Sound Designers.</li>
-          <li style="--i: 8">AI Video Creators.</li>
-          <li style="--i: 9">Peak.</li>
-        </ul>
-      </section>
-      <section class="content-section content-section-logo">
-        <img src="assets/logo.svg" alt="peak." class="scroll-end-logo" id="scrollEndLogo">
-      </section>
-    </main>
-
     <!-- CTA Section -->
     <section id="cta-section" class="section cta-section">
       <div class="container cta-content">
@@ -619,125 +595,8 @@
       });
     }
 
-    // --- SCROLL EFFECT LOGIC ---
+    // --- WHY PEAK PARALLAX ---
     gsap.registerPlugin(ScrollTrigger);
-
-    // Set initial state
-    document.documentElement.dataset.theme = 'dark';
-    document.documentElement.dataset.animate = 'true';
-    document.documentElement.dataset.snap = 'true';
-
-    // Scroll-header removed — "We Are" section now at bottom of page
-
-    // Animate the items in the scroll-list
-    const items = gsap.utils.toArray('.scroll-list li');
-    if (items.length > 0) {
-      gsap.set(items, { opacity: (i) => (i !== 0 ? 0.2 : 1) });
-
-      const dimmer = gsap.timeline()
-        .to(items.slice(1), { opacity: 1, stagger: 0.5 })
-        .to(items.slice(0, items.length - 1), { opacity: 0.2, stagger: 0.5 }, 0);
-
-      ScrollTrigger.create({
-        trigger: items[0],
-        endTrigger: items[items.length - 1],
-        start: 'center center',
-        end: 'center center',
-        animation: dimmer,
-        scrub: 0.2,
-      });
-
-      // Hue transition for the scroll-list
-      const scroller = gsap.timeline().fromTo(
-        document.documentElement,
-        { '--hue': 240 },
-        { '--hue': 350, ease: 'none' }
-      );
-
-      ScrollTrigger.create({
-        trigger: items[0],
-        endTrigger: items[items.length - 1],
-        start: 'center center',
-        end: 'center center',
-        animation: scroller,
-        scrub: 0.2,
-      });
-
-      // Chroma entry/exit
-      gsap.fromTo(document.documentElement,
-        { '--chroma': 0 },
-        {
-          '--chroma': 0.3,
-          ease: 'none',
-          scrollTrigger: {
-            scrub: 0.2,
-            trigger: items[0],
-            start: 'center center+=40',
-            end: 'center center',
-          }
-        }
-      );
-      gsap.fromTo(document.documentElement,
-        { '--chroma': 0.3 },
-        {
-          '--chroma': 0,
-          ease: 'none',
-          scrollTrigger: {
-            scrub: 0.2,
-            trigger: items[items.length - 2],
-            start: 'center center',
-            end: 'center center-=40',
-          }
-        }
-      );
-    }
-
-    // Logo scroll animation — logo settles into center of screen
-    const scrollEndLogo = document.getElementById('scrollEndLogo');
-    const logoSection = document.querySelector('.content-section-logo');
-    if (scrollEndLogo && logoSection) {
-      gsap.fromTo(scrollEndLogo,
-        {
-          scale: 1,
-          y: 0,
-          opacity: 1,
-        },
-        {
-          scale: 1.5,
-          y: 0,
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: logoSection,
-            start: 'top 60%',
-            end: 'center center',
-            scrub: 1,
-          }
-        }
-      );
-
-      // Pin the logo section so it stays centered
-      ScrollTrigger.create({
-        trigger: logoSection,
-        start: 'center center',
-        end: '+=50%',
-        pin: true,
-        pinSpacing: true,
-      });
-
-      // After pin, fade out
-      gsap.to(scrollEndLogo, {
-        opacity: 0,
-        scale: 2,
-        ease: 'power2.in',
-        scrollTrigger: {
-          trigger: logoSection,
-          start: 'center center-=10%',
-          end: 'center center-=40%',
-          scrub: 1,
-        }
-      });
-    }
 
     // === WHY PEAK PARALLAX ===
     (function() {
@@ -801,6 +660,8 @@
       }, 5.4);
 
     })();
+
+    // We Are scroll effect removed — see we-are-scroll-effect.html to restore
 
     window.addEventListener('load', () => {
       setTimeout(() => {

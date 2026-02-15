@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +93,6 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       background: transparent;
-      direction: ltr;
     }
 
     .nav {
@@ -141,13 +140,12 @@
       align-items: center;
       justify-content: center;
       padding: 8rem 2rem 3rem;
-      gap: 2.5rem;
+      gap: 3rem;
     }
 
     /* Title */
     .contact-hero {
       text-align: center;
-      direction: ltr;
     }
 
     .contact-title {
@@ -165,25 +163,16 @@
       letter-spacing: 0.02em;
     }
 
-    /* Layout: two columns */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 2.5rem;
-      max-width: 900px;
-      width: 100%;
-      direction: ltr;
-    }
-
-    /* Left column — info */
-    .contact-info {
+    /* Info cards */
+    .contact-cards {
       display: flex;
-      flex-direction: column;
       gap: 2rem;
-      justify-content: center;
+      max-width: 700px;
+      width: 100%;
     }
 
     .info-block {
+      flex: 1;
       padding: 2rem;
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 16px;
@@ -240,121 +229,34 @@
       color: #ff5080;
     }
 
-    /* Right column — form */
-    .form-card {
-      padding: 2.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .form-card-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 2rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .form-field {
-      width: 100%;
-      padding: 0.9rem 1.1rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
-      transition: border-color 0.3s ease, background 0.3s ease;
-      outline: none;
-    }
-
-    .form-field:focus {
-      border-color: rgba(255, 80, 128, 0.4);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .form-field::placeholder {
-      color: rgba(255, 255, 255, 0.25);
-    }
-
-    textarea.form-field {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1rem;
+    /* Email CTA button */
+    .email-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.5rem;
       background: linear-gradient(135deg, #ff3366, #ff5080);
       color: #ffffff;
       border: none;
       border-radius: 9999px;
       font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
+      text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-top: 0.75rem;
     }
 
-    .submit-btn:hover {
+    .email-cta:hover {
       background: linear-gradient(135deg, #ff5080, #ff6090);
       box-shadow: 0 10px 40px -10px rgba(255, 50, 100, 0.5);
       transform: translateY(-2px);
     }
 
-    .submit-btn svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* Success */
-    .success-message {
-      display: none;
-      text-align: center;
-      padding: 3rem 2rem;
-    }
-
-    .success-message.visible {
-      display: block;
-    }
-
-    .success-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .success-text {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #ffffff;
-    }
-
-    .success-subtext {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 0.5rem;
+    .email-cta svg {
+      width: 20px;
+      height: 20px;
     }
 
     /* Footer */
@@ -363,9 +265,8 @@
       z-index: 10;
       padding: 2rem;
       text-align: center;
-      direction: ltr;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
-      max-width: 900px;
+      max-width: 700px;
       width: 100%;
     }
 
@@ -389,12 +290,12 @@
         padding: 7rem 1.25rem 2rem;
       }
 
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .contact-cards {
+        flex-direction: column;
         gap: 1.5rem;
       }
 
-      .form-card, .info-block {
+      .info-block {
         padding: 1.5rem;
       }
     }
@@ -449,78 +350,32 @@
       <p class="contact-subtitle">Ready to bring your vision to the peak?</p>
     </div>
 
-    <!-- Grid: Info + Form -->
-    <div class="contact-grid">
+    <!-- Info Cards -->
+    <div class="contact-cards">
 
-      <!-- Left: Info -->
-      <div class="contact-info">
-
-        <div class="info-block fade-up fade-up-d1">
-          <div class="info-block-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-          </div>
-          <div class="info-block-label">Email</div>
-          <div class="info-block-value"><a href="mailto:hohlovichars@gmail.com">hohlovichars@gmail.com</a></div>
+      <div class="info-block fade-up fade-up-d1">
+        <div class="info-block-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
         </div>
-
-        <div class="info-block fade-up fade-up-d2">
-          <div class="info-block-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="info-block-label">Location</div>
-          <div class="info-block-value">Tel Aviv, Israel</div>
-        </div>
-
-        <div class="info-block fade-up fade-up-d3">
-          <div class="info-block-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="info-block-label">Response Time</div>
-          <div class="info-block-value">Within 24 hours</div>
-        </div>
-
+        <div class="info-block-label">Email</div>
+        <div class="info-block-value"><a href="mailto:contact@peakstudios.video">contact@peakstudios.video</a></div>
       </div>
 
-      <!-- Right: Form -->
-      <div class="form-card fade-up fade-up-d2">
-        <h2 class="form-card-title">Send us a message</h2>
-
-        <form id="contactForm" action="https://formsubmit.co/hohlovichars@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="peak. — New inquiry from website">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="">
-          <input type="text" name="_honey" style="display:none">
-
-          <div class="form-group">
-            <label class="form-label" for="name">Full Name</label>
-            <input type="text" id="name" name="name" class="form-field" placeholder="Your name" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-field" placeholder="your@email.com" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="message">Message</label>
-            <textarea id="message" name="message" class="form-field" placeholder="Tell us about your project..." required></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn">
-            Send Message
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
-          </button>
-        </form>
-
-        <div class="success-message" id="successMessage">
-          <div class="success-icon">&#x2705;</div>
-          <div class="success-text">Message sent successfully!</div>
-          <div class="success-subtext">We'll get back to you within 24 hours.</div>
+      <div class="info-block fade-up fade-up-d2">
+        <div class="info-block-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
+        <div class="info-block-label">Location</div>
+        <div class="info-block-value">Tel Aviv, Israel</div>
       </div>
 
     </div>
+
+    <!-- Email Button with pre-filled template -->
+    <a href="mailto:contact@peakstudios.video?subject=Interested%20in%20working%20with%20peak.&body=Hi%20peak.%20team%2C%0A%0AI%E2%80%99d%20love%20to%20discuss%20a%20potential%20collaboration.%0A%0ALooking%20forward%20to%20hearing%20from%20you!" class="email-cta fade-up fade-up-d3">
+      Get in Touch
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+    </a>
 
     <!-- Footer -->
     <div class="contact-footer fade-up fade-up-d4">
@@ -528,36 +383,6 @@
     </div>
 
   </div>
-
-  <script>
-    const nextInput = document.querySelector('input[name="_next"]');
-    if (nextInput) nextInput.value = window.location.href;
-
-    const form = document.getElementById('contactForm');
-    const successMessage = document.getElementById('successMessage');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const submitBtn = form.querySelector('.submit-btn');
-      const originalHTML = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Sending...';
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.7';
-
-      try {
-        await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        form.style.display = 'none';
-        successMessage.classList.add('visible');
-      } catch (err) {
-        form.submit();
-      }
-    });
-  </script>
 
 </body>
 </html>
