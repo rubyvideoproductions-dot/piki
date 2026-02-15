@@ -805,15 +805,23 @@ body.loading {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 0.35em;
+  gap: 1em;
   white-space: nowrap;
   will-change: transform, opacity;
 }
 
-.wp-why,
 .wp-peak {
   font-family: 'Inter', sans-serif;
   font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.wp-why {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.5rem, 5.6vw, 5rem);
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.04em;
@@ -824,17 +832,17 @@ body.loading {
 .wp-line {
   position: absolute;
   left: 50%;
-  top: 58%;
-  transform: translate(-50%, 0);
+  top: 57%;
+  transform: translate(-50%, -50%);
   text-align: center;
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: -0.01em;
-  line-height: 1.7;
-  max-width: 600px;
-  width: 85%;
+  font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.4;
+  max-width: 800px;
+  width: 90%;
   opacity: 0;
   will-change: opacity, transform;
 }
@@ -847,8 +855,9 @@ body.loading {
 /* ===== SELECTED WORKS PREVIEW ===== */
 .works-preview-section {
   position: relative;
-  z-index: 10;
+  z-index: 20;
   padding: 6rem 2rem 8rem;
+  background: #121212;
 }
 
 .works-preview-header {
