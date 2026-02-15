@@ -894,6 +894,60 @@ body.loading {
   overflow: hidden;
 }
 
+.work-preview-player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.work-preview-player iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+}
+
+.work-preview-video.active .work-preview-player iframe {
+  pointer-events: auto;
+}
+
+/* Play button overlay */
+.work-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.work-play-btn svg {
+  width: 48px;
+  height: 48px;
+  color: rgba(255, 255, 255, 0);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.work-preview-video:hover .work-play-btn svg {
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+}
+
+.work-preview-video:hover .work-play-btn {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.work-preview-video.active .work-play-btn {
+  display: none;
+}
+
 .work-preview-placeholder {
   width: 100%;
   height: 100%;

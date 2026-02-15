@@ -18,7 +18,7 @@
     .works-page {
       position: relative;
       z-index: 10;
-      padding: 10rem 2rem 6rem;
+      padding: 8rem 2rem 6rem;
       max-width: 1200px;
       margin: 0 auto;
       opacity: 0;
@@ -29,29 +29,49 @@
       to { opacity: 1; }
     }
 
-    .works-page-header {
-      margin-bottom: 4rem;
+    /* === SHOWREEL HERO === */
+    .works-showreel {
+      margin-bottom: 3rem;
     }
 
-    .works-page-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 300;
-      color: #ffffff;
-      text-transform: lowercase;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
+    .works-showreel-video {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
     }
 
-    .works-page-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: #555;
-      text-transform: lowercase;
-      letter-spacing: 0.1em;
+    .works-showreel-player {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
+    .works-showreel-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .works-showreel-video.active .works-showreel-player iframe {
+      pointer-events: auto;
+    }
+
+    .works-showreel-video .work-play-btn svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .works-showreel-video.active .work-play-btn {
+      display: none;
+    }
+
+    /* === GRID === */
     .works-page-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -72,56 +92,63 @@
       cursor: pointer;
     }
 
-    .work-card-placeholder {
+    .work-card-player {
+      position: relative;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .work-card-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .work-card-video.active .work-card-player iframe {
+      pointer-events: auto;
+    }
+
+    .work-card-video.active .work-play-btn {
+      display: none;
+    }
+
+    /* === PLAY BUTTON (shared) === */
+    .work-play-btn {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.3s ease, border-color 0.3s ease;
+      z-index: 3;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.3s ease;
     }
 
-    .work-card-placeholder:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .work-card-play {
-      font-size: 1.5rem;
-      color: rgba(255, 255, 255, 0.12);
+    .work-play-btn svg {
+      width: 48px;
+      height: 48px;
+      color: rgba(255, 255, 255, 0);
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
       transition: color 0.3s ease, transform 0.3s ease;
     }
 
-    .work-card-placeholder:hover .work-card-play {
-      color: rgba(255, 255, 255, 0.35);
+    .works-showreel-video:hover .work-play-btn svg,
+    .work-card-video:hover .work-play-btn svg {
+      color: rgba(255, 255, 255, 0.9);
       transform: scale(1.1);
     }
 
-    .work-card-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 0 0.25rem;
+    .works-showreel-video:hover .work-play-btn,
+    .work-card-video:hover .work-play-btn {
+      background: rgba(0, 0, 0, 0.2);
     }
 
-    .work-card-name {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9375rem;
-      font-weight: 400;
-      color: #ccc;
-    }
-
-    .work-card-category {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #555;
-      text-transform: lowercase;
-      letter-spacing: 0.05em;
-    }
-
+    /* === FOOTER === */
     .works-page-footer {
       margin-top: 6rem;
       padding-top: 2rem;
@@ -141,8 +168,8 @@
         gap: 1.5rem;
       }
 
-      .works-page-header {
-        margin-bottom: 2.5rem;
+      .works-showreel {
+        margin-bottom: 2rem;
       }
     }
   </style>
@@ -164,78 +191,70 @@
   </header>
 
   <div class="works-page">
+
+    <!-- Showreel — big hero block -->
+    <div class="works-showreel">
+      <div class="works-showreel-video" data-vimeo-id="1152345652">
+        <div class="works-showreel-player">
+          <iframe src="https://player.vimeo.com/video/1152345652?autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="work-play-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects grid -->
     <div class="works-page-grid">
 
       <article class="work-card">
-        <div class="work-card-video">
-          <div class="work-card-placeholder">
-            <span class="work-card-play">&#9654;</span>
+        <div class="work-card-video" data-vimeo-id="1165197450">
+          <div class="work-card-player">
+            <iframe src="https://player.vimeo.com/video/1165197450?autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <div class="work-hover-overlay">
-            <span class="work-hover-title">Project Title</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="work-card">
-        <div class="work-card-video">
-          <div class="work-card-placeholder">
-            <span class="work-card-play">&#9654;</span>
-          </div>
-          <div class="work-hover-overlay">
-            <span class="work-hover-title">Project Title</span>
+          <div class="work-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
         </div>
       </article>
 
       <article class="work-card">
-        <div class="work-card-video">
-          <div class="work-card-placeholder">
-            <span class="work-card-play">&#9654;</span>
+        <div class="work-card-video" data-youtube-id="sVxZ4Pma1sg">
+          <div class="work-card-player">
+            <iframe src="https://www.youtube.com/embed/sVxZ4Pma1sg?autoplay=1&mute=1&loop=1&playlist=sVxZ4Pma1sg&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
           </div>
-          <div class="work-hover-overlay">
-            <span class="work-hover-title">Project Title</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="work-card">
-        <div class="work-card-video">
-          <div class="work-card-placeholder">
-            <span class="work-card-play">&#9654;</span>
-          </div>
-          <div class="work-hover-overlay">
-            <span class="work-hover-title">Project Title</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="work-card">
-        <div class="work-card-video">
-          <div class="work-card-placeholder">
-            <span class="work-card-play">&#9654;</span>
-          </div>
-          <div class="work-hover-overlay">
-            <span class="work-hover-title">Project Title</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="work-card">
-        <div class="work-card-video">
-          <div class="work-card-placeholder">
-            <span class="work-card-play">&#9654;</span>
-          </div>
-          <div class="work-hover-overlay">
-            <span class="work-hover-title">Project Title</span>
+          <div class="work-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
         </div>
       </article>
 
     </div>
 
-    <footer class="works-page-footer">© 2026 peak.</footer>
+    <footer class="works-page-footer">&copy; 2026 peak.</footer>
   </div>
+
+  <script>
+    // Click-to-play for all video cards
+    document.querySelectorAll('.work-play-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.works-showreel-video') || btn.closest('.work-card-video');
+        if (!card || card.classList.contains('active')) return;
+
+        const vimeoId = card.dataset.vimeoId;
+        const youtubeId = card.dataset.youtubeId;
+
+        card.classList.add('active');
+        const iframe = card.querySelector('iframe');
+
+        if (vimeoId) {
+          iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=58479`;
+        } else if (youtubeId) {
+          iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
