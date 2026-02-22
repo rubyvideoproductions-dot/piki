@@ -1,37 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 @layer scroll-effect {
-  @layer normalize, base, demo, stick, effect, debug;
-
-  @layer debug {
-    [data-debug='true'] li {
-      outline: 0.05em dashed currentColor;
-    }
-    [data-debug='true'] :is(h2, li:last-of-type) {
-      outline: 0.05em dashed canvasText;
-    }
-  }
+  @layer base, stick, effect;
 
   @layer effect {
     :root {
-      --start: 240;
-      --end: 350;
-      --lightness: 80%; /* Increased lightness for dark background */
-      --base-chroma: 0.3;
-    }
-    [data-theme='dark'] {
-      --lightness: 80%;
-    }
-    [data-theme='light'] {
-      --lightness: 65%;
-    }
-    @media (prefers-color-scheme: dark) {
+      --start: 220;
+      --end: 250;
       --lightness: 75%;
+      --base-chroma: 0.2;
     }
-    ul {
+
+    .scroll-list {
       --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
     }
-    li:not(:last-of-type) {
+
+    .scroll-list li:not(:last-of-type) {
       color: oklch(
         var(--lightness) var(--base-chroma)
           calc(var(--start) + (var(--step) * var(--i)))
@@ -39,23 +23,20 @@
     }
 
     @supports (animation-timeline: scroll()) and (animation-range: 0% 100%) {
-      [data-animate='true'] {
-        li {
-          opacity: 0.2;
-          animation-name: brighten;
-
-          &:first-of-type {
-            --start-opacity: 1;
-          }
-          &:last-of-type {
-            --brightness: 1;
-            --end-opacity: 1;
-          }
-          animation-fill-mode: both;
-          animation-timing-function: linear;
-          animation-range: cover calc(50% - 1lh) calc(50% + 1lh);
-          animation-timeline: view();
-        }
+      [data-animate='true'] .scroll-list li {
+        opacity: 0.2;
+        animation-name: brighten;
+        animation-fill-mode: both;
+        animation-timing-function: linear;
+        animation-range: cover calc(50% - 1lh) calc(50% + 1lh);
+        animation-timeline: view();
+      }
+      [data-animate='true'] .scroll-list li:first-of-type {
+        --start-opacity: 1;
+      }
+      [data-animate='true'] .scroll-list li:last-of-type {
+        --brightness: 1;
+        --end-opacity: 1;
       }
 
       @keyframes brighten {
@@ -74,36 +55,19 @@
   }
 
   @layer stick {
-    section.content-section:first-of-type {
+    .scroll-container {
+      width: 100%;
+    }
+
+    .scroll-section {
       --font-level: 6;
       display: flex;
       line-height: 1.25;
       width: 100%;
-      padding-left: 15vw;
+      padding-left: 5rem;
     }
-    section.content-section:last-of-type {
-      min-height: 100vh;
-      display: flex;
-      place-items: center;
-      width: 100%;
-      justify-content: center;
-      position: relative;
-    }
-    section.content-section:last-of-type::before {
-      content: '';
-      position: absolute;
-      top: -30vh;
-      left: 0;
-      right: 0;
-      height: 30vh;
-      background: linear-gradient(to bottom, transparent 0%, rgba(18, 18, 18, 0.85) 100%);
-      pointer-events: none;
-      z-index: 2;
-    }
-    main.scroll-container {
-      width: 100%;
-    }
-    section.content-section:first-of-type h2 {
+
+    .scroll-section h2 {
       position: sticky;
       top: calc(50% - 0.5lh);
       font-size: inherit;
@@ -112,71 +76,31 @@
       height: fit-content;
       font-weight: 600;
     }
-    ul.scroll-list {
+
+    .scroll-list {
       font-weight: 600;
       padding-inline: 0;
       margin: 0;
       list-style-type: none;
     }
 
-    [data-snap='true'] .scroll-container {
+    /* Snap — на html, т.к. он является scroll container */
+    [data-snap='true'] {
       scroll-snap-type: y proximity;
     }
     [data-snap='true'] .scroll-list li {
-        scroll-snap-align: center;
+      scroll-snap-align: center;
     }
 
-    .scroll-list li:last-of-type,
-    section.content-section h2 {
+    .scroll-section h2,
+    .scroll-list li:last-of-type {
       background: linear-gradient(
         #ffffff 50%,
         rgba(255, 255, 255, 0.4)
       );
       background-clip: text;
-      color: #0000;
-    }
-  }
-
-  @layer demo {
-    header.scroll-header {
-      min-height: 50vh;
-      display: flex;
-      place-items: center;
-      justify-content: center;
-      width: 100%;
-      padding-inline: 2rem;
-      margin-top: 50px;
-      margin-bottom: 50px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-      /* Initial state for animation */
-      opacity: 0;
-      filter: blur(15px);
-      transform: translateY(100px) scale(0.8);
-      will-change: transform, opacity, filter;
-    }
-
-    footer.scroll-footer {
-      padding-block: 5rem;
-      opacity: 0.5;
-      text-align: center;
-      width: 100%;
-    }
-
-    h1.fluid {
-      --font-size-min: 24;
-      --font-level: 8;
-      text-wrap: pretty;
-      line-height: 0.8;
-      margin: 0;
-      background: linear-gradient(
-        #ffffff 60%,
-        rgba(255, 255, 255, 0.4)
-      );
-      background-clip: text;
       -webkit-background-clip: text;
-      color: transparent;
+      color: #0000;
     }
   }
 
@@ -212,7 +136,6 @@
       font-size: var(--fluid-type);
     }
 
-    /* Utilities */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -224,30 +147,11 @@
       white-space: nowrap;
       border-width: 0;
     }
-    
-    .scroll-container, .scroll-header, .scroll-footer {
+
+    .scroll-container {
       font-family: 'Geist', 'SF Pro Text', 'SF Pro Icons', 'AOS Icons',
         'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
       color: #e0e0e0;
     }
-    
-    .scroll-container h1.fluid { --font-level: 8; }
-    .scroll-container h2.fluid { --font-level: 6; }
-    .scroll-container section:first-of-type { --font-level: 6; }
-    
-    .scroll-list li:last-of-type,
-    section.content-section h2 {
-      background: linear-gradient(
-        #ffffff 50%,
-        rgba(255, 255, 255, 0.4)
-      );
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
   }
-}
-
-div.tp-dfwv {
-  position: fixed;
 }
