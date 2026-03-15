@@ -60,21 +60,24 @@
     }
 
     .scroll-section {
-      --font-level: 6;
+      --font-level: 4;
       display: flex;
+      justify-content: center;
+      gap: 1ch;
       line-height: 1.25;
       width: 100%;
-      padding-left: 5rem;
+      padding: 50vh 0;
     }
 
     .scroll-section h2 {
       position: sticky;
-      top: calc(50% - 0.5lh);
+      top: calc(50vh - 1rem);
       font-size: inherit;
       margin: 0;
       display: inline-block;
       height: fit-content;
       font-weight: 600;
+      align-self: flex-start;
     }
 
     .scroll-list {
@@ -149,8 +152,6 @@
     }
 
     .scroll-container {
-      font-family: 'Geist', 'SF Pro Text', 'SF Pro Icons', 'AOS Icons',
-        'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
       color: #e0e0e0;
     }
   }
