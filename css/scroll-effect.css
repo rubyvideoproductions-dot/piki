@@ -89,14 +89,6 @@
       list-style-type: none;
     }
 
-    /* Snap — на html, т.к. он является scroll container */
-    [data-snap='true'] {
-      scroll-snap-type: y proximity;
-    }
-    [data-snap='true'] .scroll-list li {
-      scroll-snap-align: center;
-    }
-
     .scroll-section h2,
     .scroll-list li:last-of-type {
       background: linear-gradient(
