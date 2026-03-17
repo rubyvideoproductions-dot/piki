@@ -9,6 +9,8 @@
       --end: 250;
       --lightness: 75%;
       --base-chroma: 0.2;
+      --sticky-top: 50vh;
+      --anim-trigger: 50%;
     }
 
     .scroll-list {
@@ -28,7 +30,7 @@
         animation-name: brighten;
         animation-fill-mode: both;
         animation-timing-function: linear;
-        animation-range: cover calc(50% - 1lh) calc(50% + 1lh);
+        animation-range: cover calc(var(--anim-trigger) - 1lh) calc(var(--anim-trigger) + 1lh);
         animation-timeline: view();
       }
       [data-animate='true'] .scroll-list li:first-of-type {
@@ -73,7 +75,7 @@
 
     .scroll-section h2 {
       position: sticky;
-      top: calc(50vh - 1rem);
+      top: calc(var(--sticky-top) - 1rem);
       font-size: inherit;
       margin: 0;
       display: inline-block;
@@ -150,6 +152,10 @@
     }
     
     @media (max-width: 768px) {
+      :root {
+        --sticky-top: 150px;
+        --anim-trigger: calc(100vh - 150px);
+      }
       .scroll-container {
         height: auto !important;
         min-height: auto !important;
@@ -160,9 +166,6 @@
         height: auto !important;
         min-height: auto !important;
         padding: 50px 0 !important;
-      }
-      .scroll-section h2 {
-        top: 50px !important;
       }
     }
   }
