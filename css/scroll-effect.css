@@ -148,5 +148,22 @@
     .scroll-container {
       color: #e0e0e0;
     }
+    
+    @media (max-width: 768px) {
+      .scroll-container {
+        height: auto !important;
+        min-height: auto !important;
+        margin-top: 50px !important;
+        padding-top: 0 !important;
+      }
+      .scroll-section {
+        height: auto !important;
+        min-height: auto !important;
+        padding: 50px 0 !important;
+      }
+      .scroll-section h2 {
+        top: 50px !important;
+      }
+    }
   }
 }

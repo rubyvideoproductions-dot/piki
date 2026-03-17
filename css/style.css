@@ -1020,14 +1020,20 @@ body.loading {
 /* Mobile adaptation for scroll-down button */
 @media (max-width: 768px) {
   #hero-cover {
-    height: 80vh;
-    padding-top: 12vh;
+    height: auto !important;
+    min-height: auto !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 50px;
   }
   .cover-center {
-    padding-top: calc(2vh + 60px);
+    padding-top: 0;
+    margin-bottom: 0;
   }
   .main-title {
-    max-width: 300px;
+    max-width: 100%;
   }
   .scroll-down {
     display: none !important;
@@ -1042,12 +1048,22 @@ body.loading {
   }
 
   #showreel {
-    margin-top: -20vh !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin-top: 50px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
 
 /* ===== MOBILE OPTIMIZATIONS ===== */
 @media (max-width: 768px) {
+  .hero {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 100px 20px 50px;
+  }
+
   .nav {
     display: flex;
     flex-direction: row;
@@ -1065,21 +1081,28 @@ body.loading {
   }
 
   .main-title {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    font-size: clamp(2rem, 8vw, 3rem);
     letter-spacing: -0.03em;
     transform: translateY(0);
   }
 
   #hero-cover {
-    padding: 15vh 1rem 2rem;
+    height: auto !important;
+    min-height: auto !important;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .cover-center {
-    padding-top: 20vh;
+    padding-top: 0;
   }
 
   #showreel {
-    margin-top: 5vh !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin-top: 50px !important;
   }
 
   #videoCard, .video-container {
@@ -1093,9 +1116,29 @@ body.loading {
 
 
   /* Why Peak parallax mobile */
+  .why-peak-parallax {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 50px 0 !important;
+    margin: 50px 0 !important;
+  }
+  .why-peak-pin {
+    height: auto !important;
+    min-height: auto !important;
+    position: relative !important;
+    padding: 50px 0 !important;
+  }
   .wp-line {
-    width: 92%;
+    width: 90%;
     max-width: 100%;
+    margin-bottom: 0;
+  }
+  
+  .cta-section {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 50px 1rem !important;
+    margin-top: 50px !important;
   }
 
   .works-preview-grid {

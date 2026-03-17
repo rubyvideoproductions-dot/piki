@@ -680,54 +680,63 @@
       const line2 = document.getElementById('wpLine2');
       const line3 = document.getElementById('wpLine3');
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.why-peak-parallax',
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1,
-        }
+      let mm = gsap.matchMedia();
+
+      mm.add({
+        isDesktop: "(min-width: 769px)",
+        isMobile: "(max-width: 768px)"
+      }, (context) => {
+        let { isDesktop } = context.conditions;
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.why-peak-parallax',
+            start: isDesktop ? 'top top' : 'top 85%',
+            end: isDesktop ? 'bottom bottom' : 'bottom 15%',
+            scrub: 1,
+          }
+        });
+
+        // Phase 1: "Why Peak." visible, hold, then move up — line 1 appears below
+        tl.to(stage, {
+          y: '-15vh',
+          duration: 1,
+          ease: 'power2.inOut',
+        }, 0.8)
+        .fromTo(line1,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          1.2
+        )
+
+        // Phase 2: Line 1 out, line 2 in
+        .to(line1, {
+          opacity: 0, y: -15,
+          duration: 0.6, ease: 'power2.in',
+        }, 2.4)
+        .fromTo(line2,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          2.7
+        )
+
+        // Phase 3: Line 2 out, line 3 in
+        .to(line2, {
+          opacity: 0, y: -15,
+          duration: 0.6, ease: 'power2.in',
+        }, 3.9)
+        .fromTo(line3,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          4.2
+        )
+
+        // Phase 4: Everything fades out
+        .to([stage, line3], {
+          opacity: 0,
+          duration: 0.8, ease: 'power2.in',
+        }, 5.4);
       });
-
-      // Phase 1: "Why Peak." visible, hold, then move up — line 1 appears below
-      tl.to(stage, {
-        y: '-15vh',
-        duration: 1,
-        ease: 'power2.inOut',
-      }, 0.8)
-      .fromTo(line1,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        1.2
-      )
-
-      // Phase 2: Line 1 out, line 2 in
-      .to(line1, {
-        opacity: 0, y: -15,
-        duration: 0.6, ease: 'power2.in',
-      }, 2.4)
-      .fromTo(line2,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        2.7
-      )
-
-      // Phase 3: Line 2 out, line 3 in
-      .to(line2, {
-        opacity: 0, y: -15,
-        duration: 0.6, ease: 'power2.in',
-      }, 3.9)
-      .fromTo(line3,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        4.2
-      )
-
-      // Phase 4: Everything fades out
-      .to([stage, line3], {
-        opacity: 0,
-        duration: 0.8, ease: 'power2.in',
-      }, 5.4);
 
     })();
 
