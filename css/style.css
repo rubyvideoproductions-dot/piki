@@ -1157,7 +1157,7 @@ body.loading {
   .cta-section {
     height: auto !important;
     min-height: auto !important;
-    padding: 50px 1rem !important;
+    padding: 50px 1rem 120px !important;
     margin-top: 0 !important;
   }
 
