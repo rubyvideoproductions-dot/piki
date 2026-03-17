@@ -1136,16 +1136,17 @@ body.loading {
 
   /* Why Peak parallax mobile */
   .why-peak-parallax {
-    height: auto !important;
+    height: 120vh !important;
     min-height: auto !important;
-    padding: 50px 0 !important;
-    margin: 50px 0 !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
   }
   .why-peak-pin {
-    height: auto !important;
-    min-height: auto !important;
-    position: relative !important;
-    padding: 50px 0 !important;
+    height: calc(100vh - 50px) !important;
+    min-height: 300px !important;
+    position: sticky !important;
+    top: 50px !important;
+    padding-top: 0 !important;
   }
   .wp-line {
     width: 90%;
@@ -1157,7 +1158,7 @@ body.loading {
     height: auto !important;
     min-height: auto !important;
     padding: 50px 1rem !important;
-    margin-top: 50px !important;
+    margin-top: 0 !important;
   }
 
   .works-preview-grid {
